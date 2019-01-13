@@ -1,34 +1,36 @@
 import React, { Component } from "react";
 import { Bar, Line, Scatter } from "react-chartjs-2";
+import "./Chart.css";
+// import Line from "chart.js";
+// import CanvasJSReact from "./canvasjs.react";
+// var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// var LineChart = require("react-chartjs").Line;
 
 class Chart extends Component {
   render() {
     const { chartData } = this.props;
+    console.log(chartData);
     const data = {
-      labels: ["Scatter"],
+      labels: chartData,
       datasets: [
         {
           label: "My First dataset",
-          fill: false,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           showLine: true,
-          backgroundColor: "rgba(75,192,192,0.4)",
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
           data: chartData
         }
       ]
     };
+    const options = {
+      tooltips: {
+        enabled: true
+      }
+    };
+
     return (
-      <div>
-        <Scatter data={data} />
+      <div className="chart">
+        <Line data={data} options={options} />
       </div>
     );
   }

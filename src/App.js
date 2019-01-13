@@ -3,12 +3,7 @@ import axios from "axios";
 import { bigArray } from "./BigArray";
 import Header from "./Components/Header";
 import InputBar from "./Components/InputBar";
-// import Chart from "./Components/Chart";
-
-// import InputBarTest from "./Components/InputBar.1";
-// import ConvertResult from "./Components/ConvertResult";
-// import ConvertResultTest from "./Components/ConvertResult.1";
-
+// import Canvas from "./Components/CanvasJS";
 import "./App.css";
 
 class App extends Component {
@@ -17,8 +12,6 @@ class App extends Component {
     this.state = {
       converted: [],
       myObj: {},
-      chartData: {},
-      myData: {},
       phrase: [],
       code: []
     };
@@ -51,11 +44,20 @@ class App extends Component {
     let myObj = {};
     myObj["sentence"] = phrase;
     myObj["cypher"] = code;
-    // let data = Object.create(Object.prototype, [{ x: null, y: null }]);
-    myObj["data"] = [];
-    // myObj["data"] = Object.create(Object.prototype, [{ x: null, y: null }]);
+    myObj.data = [];
+
+    function coordinates(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+
     for (i = 0; i < code.length; i++) {
-      myObj["data"].push({ x: code[i], y: code[i] });
+      //Good data type for chartjs
+      myObj["data"].push(parseInt(code[i]));
+      //Good data type for canvasjs
+      // myObj["data"].push({ x: parseInt(code[i]), y: parseInt(code[i]) });
+      //Good data type for react-chartjs-2
+      // myObj["data"].push({ x: code[i], y: code[i] });
     }
 
     axios.post("http://localhost:5000/converted", myObj).then(() =>
@@ -79,9 +81,9 @@ class App extends Component {
   //   });
   // };
 
-  adding = () => {
-    this.setState({ inputTerm: "" });
-  };
+  // adding = () => {
+  //   this.setState({ inputTerm: "" });
+  // };
 
   render() {
     return (
@@ -94,14 +96,9 @@ class App extends Component {
           addConverted={this.addConverted}
           convert={this.convert}
         />
-        {/* <InputBarTest
-          myObj={this.state.myObj}
-          converted={this.state.converted}
-          adding={this.adding}
-        /> */}
-        {/* <ConvertResult converted={this.state.converted} /> */}
-        {/* <ConvertResultTest converted={this.state.converted} /> */}
-        {/* <Chart chartData={this.chartData} /> */}
+        {/* {this.state.converted.map(dt => (
+          <Canvas points={dt.data} />
+        ))} */}
       </div>
     );
   }
