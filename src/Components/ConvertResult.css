@@ -1,0 +1,16 @@
+.resultcard {
+  display: flex;
+  color: red !important;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  /* width: 100%; */
+  padding: 15px 10px;
+  overflow: hidden;
+}
+
+.result-item {
+  flex: 1 1 350px;
+  margin: 5px;
+  position: relative;
+  max-width: 24%;
+}

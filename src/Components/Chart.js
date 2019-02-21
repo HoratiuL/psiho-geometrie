@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Bar, Line, Scatter } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import "./Chart.css";
-// import Line from "chart.js";
 // import CanvasJSReact from "./canvasjs.react";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 // var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -16,8 +15,9 @@ class Chart extends Component {
       datasets: [
         {
           label: "My First dataset",
-          maintainAspectRatio: false,
           showLine: true,
+          fill: false,
+          // backgroundColor: "rgba(214, 20, 115, 0.5)",
           data: chartData
         }
       ]
@@ -25,6 +25,55 @@ class Chart extends Component {
     const options = {
       tooltips: {
         enabled: true
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+
+      scales: {
+        ticks: {
+          beginAtZero: true,
+          autoSkip: true,
+          maxTicksLimit: 20,
+          maxRotation: 30
+        },
+        layout: {
+          padding: {
+            left: 50,
+            right: 50,
+            top: 50,
+            bottom: 50
+          }
+        },
+        // yAxes: [
+        //   {
+        //     display: true,
+        //     ticks: {
+        //       beginAtZero: true,
+        //       steps: 10,
+        //       stepValue: 1,
+        //       max: 10,
+        //       min: 0,
+        //       display: true
+        //     }
+        //   }
+        // ],
+        xAxes: [
+          {
+            display: true,
+            ticks: {
+              beginAtZero: true,
+              steps: 10,
+              stepValue: 10,
+              max: 10,
+              min: 0,
+              offset: true,
+              scaleBeginAtZero: true,
+              autoSkip: true,
+              maxTicksLimit: 20,
+              maxRotation: 30
+            }
+          }
+        ]
       }
     };
 

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import ConvertResult from "./ConvertResult";
+// import ConvertResult from "./ConvertResult";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import "./InputBar.css";
-import Chart from "./Chart";
+// import Chart from "./Chart";
 // import Canvas from "./CanvasJS";
 
 class InputBar extends Component {
@@ -46,14 +46,14 @@ class InputBar extends Component {
             </div>
           </Toolbar>
         </AppBar>
-        {converted.map(i => (
+        {/*converted.map(i => (
           <ConvertResult
             key={i.cypher}
             sentence={i.sentence}
             cypher={i.cypher}
             chartData={i.data}
           />
-        ))}
+        ))*/}
       </div>
     );
   }

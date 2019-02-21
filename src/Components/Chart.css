@@ -1,5 +1,9 @@
 .chart {
   width: 350px;
-  /* height: 100px; */
-  /* position: absolute; */
+  box-sizing: content-box;
+}
+
+canvas {
+  width: 350px;
+  /* height: 350px !important; */
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import CanvasJSReact from "../canvasjs.react";
+// import CanvasJSReact from "../canvasjs.react";
+var CanvasJSReact = require("../canvasjs.react");
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -12,22 +13,17 @@ class Canvas extends Component {
       },
       data: [
         {
-          type: "line",
-          dataPoints: [
-            { x: 2, y: 2 },
-            { x: 4, y: 4 },
-            { x: 3, y: 3 },
-            { x: 6, y: 6 }
-          ]
+          type: "spline",
+          dataPoints: chartData
         }
       ]
     };
     return (
       <div>
-        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)} />
+        <CanvasJSReact options={options} onRef={ref => (this.chart = ref)} />
       </div>
     );
   }
 }
-
+// module.exports = Canvas;
 export default Canvas;

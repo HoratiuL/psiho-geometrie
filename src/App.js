@@ -3,6 +3,7 @@ import axios from "axios";
 import { bigArray } from "./BigArray";
 import Header from "./Components/Header";
 import InputBar from "./Components/InputBar";
+import ConvertSection from "./Components/ConvertSection";
 // import Canvas from "./Components/CanvasJS";
 import "./App.css";
 
@@ -19,8 +20,8 @@ class App extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:5000/converted").then(resp => {
-      this.setState({ converted: resp.data });
       console.log(resp);
+      this.setState({ converted: resp.data });
     });
   }
 
@@ -46,44 +47,38 @@ class App extends Component {
     myObj["cypher"] = code;
     myObj.data = [];
 
-    function coordinates(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-
     for (i = 0; i < code.length; i++) {
       //Good data type for chartjs
       myObj["data"].push(parseInt(code[i]));
-      //Good data type for canvasjs
+      // Good data type for canvasjs
       // myObj["data"].push({ x: parseInt(code[i]), y: parseInt(code[i]) });
       //Good data type for react-chartjs-2
       // myObj["data"].push({ x: code[i], y: code[i] });
+      // console.log(myObj["data"]);
     }
 
-    axios.post("http://localhost:5000/converted", myObj).then(() =>
-      this.setState({
-        converted: [...this.state.converted, myObj]
-      })
-    );
+    axios
+      .post("http://localhost:5000/converted", myObj)
+      .then(() =>
+        this.setState({
+          converted: [...this.state.converted, myObj]
+        })
+      )
+      .catch(function(error) {
+        console.log(error);
+      });
     // console.log(phrase);
     console.log(myObj);
   };
 
-  // addConverted = obj => {
-  //   const newObj = {
-  //     ...obj,
-  //     sentence: obj.phrase,
-  //     cypher: obj.code
-  //   };
-  //   axios.post("http://localhost:5000/converted", newObj).then(() => {
-  //     this.setState({ converted: [newObj, ...this.state.converted] });
-  //     console.log(newObj);
-  //   });
-  // };
-
-  // adding = () => {
-  //   this.setState({ inputTerm: "" });
-  // };
+  deleteCard = id => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/converted/${id}`).then(() => {
+      const { converted } = this.state;
+      const filtered = converted.filter(c => c.id !== id);
+      this.setState({ converted: filtered });
+    });
+  };
 
   render() {
     return (
@@ -95,6 +90,10 @@ class App extends Component {
           converted={this.state.converted}
           addConverted={this.addConverted}
           convert={this.convert}
+        />
+        <ConvertSection
+          converted={this.state.converted}
+          deleteCard={this.deleteCard}
         />
         {/* {this.state.converted.map(dt => (
           <Canvas points={dt.data} />
