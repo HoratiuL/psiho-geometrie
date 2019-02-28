@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### launch with "npm run-script launch"
+to start the project and the json-server simultaneous .
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
@@ -28,6 +31,8 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
+
+
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
