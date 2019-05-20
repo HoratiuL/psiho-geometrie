@@ -19,10 +19,11 @@ class InputBar extends Component {
   }
 
   onInputChange = event => {
-    const { value } = event.target;
     event.preventDefault();
+    const { value } = event.target;
+    const val2 = value.toLowerCase();
     this.setState({
-      inputTerm: value
+      inputTerm: val2
     });
   };
 
@@ -46,14 +47,6 @@ class InputBar extends Component {
             </div>
           </Toolbar>
         </AppBar>
-        {/*converted.map(i => (
-          <ConvertResult
-            key={i.cypher}
-            sentence={i.sentence}
-            cypher={i.cypher}
-            chartData={i.data}
-          />
-        ))*/}
       </div>
     );
   }

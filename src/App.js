@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import InputBar from "./Components/InputBar";
 import ConvertSection from "./Components/ConvertSection";
 // import Canvas from "./Components/CanvasJS";
+// import ChartVis from "./Components/ChartVis";
 import "./App.css";
 
 class App extends Component {
@@ -25,18 +26,31 @@ class App extends Component {
     });
   }
 
+  removeDuplicateCharacters = string => {
+    return string
+      .split("")
+      .filter(function(item, pos, self) {
+        return self.indexOf(item) == pos;
+      })
+      .join("");
+  };
+
   convert = inputTerm => {
     let { phrase, code } = this.state;
-    for (var i = 0; i < Object.values(inputTerm).length; i++) {
+    let vorb = this.removeDuplicateCharacters(inputTerm);
+
+    console.log("this is:", vorb);
+
+    for (var i = 0; i < Object.values(vorb).length; i++) {
       // console.log(inputTerm);
       for (var j = 0; j < Object.keys(bigArray).length; j++) {
-        if (Object.values(inputTerm)[i] === Object.keys(bigArray)[j]) {
+        if (Object.values(vorb)[i] === Object.keys(bigArray)[j]) {
           code += Object.values(bigArray)[j];
           // console.log(code);
         }
       }
     }
-    phrase = inputTerm;
+    phrase = vorb;
     this.setState({
       phrase: phrase,
       inputTerm: ""
@@ -45,15 +59,19 @@ class App extends Component {
     let myObj = {};
     myObj["sentence"] = phrase;
     myObj["cypher"] = code;
-    myObj.data = [];
+    myObj.dataChart = [];
+    myObj.dataVis = [];
 
     for (i = 0; i < code.length; i++) {
       //Good data type for chartjs
-      myObj["data"].push(parseInt(code[i]));
+      myObj["dataChart"].push(parseInt(code[i]));
       // Good data type for canvasjs
       // myObj["data"].push({ x: parseInt(code[i]), y: parseInt(code[i]) });
       //Good data type for react-chartjs-2
-      // myObj["data"].push({ x: code[i], y: code[i] });
+      myObj["dataVis"].push({
+        x: i + 1,
+        y: code[i]
+      });
       // console.log(myObj["data"]);
     }
 
@@ -95,6 +113,7 @@ class App extends Component {
           converted={this.state.converted}
           deleteCard={this.deleteCard}
         />
+        {/* <ChartVis converted={this.state.converted} /> */}
         {/* {this.state.converted.map(dt => (
           <Canvas points={dt.data} />
         ))} */}

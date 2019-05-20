@@ -9,7 +9,8 @@ import "./Chart.css";
 class Chart extends Component {
   render() {
     const { chartData } = this.props;
-    console.log(chartData);
+    // console.log(chartData);
+
     const data = {
       labels: chartData,
       datasets: [
@@ -18,16 +19,19 @@ class Chart extends Component {
           showLine: true,
           fill: false,
           // backgroundColor: "rgba(214, 20, 115, 0.5)",
+          borderColor: this.gradient,
           data: chartData
         }
       ]
     };
+
     const options = {
       tooltips: {
         enabled: true
       },
       responsive: true,
       maintainAspectRatio: true,
+      // line: { borderColor: "#F85F73" },
 
       scales: {
         ticks: {

@@ -12,7 +12,8 @@ function ConvertSection(props) {
           id={i.id}
           sentence={i.sentence}
           cypher={i.cypher}
-          chartData={i.data}
+          chartData={i.dataChart}
+          chartVis={i.dataVis}
           deleteCard={deleteCard}
         />
       ))}
