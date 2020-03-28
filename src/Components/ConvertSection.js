@@ -11,7 +11,10 @@ function ConvertSection(props) {
           key={i.cypher}
           id={i.id}
           sentence={i.sentence}
+          sentenceWhole={i.sentenceWhole}
+          sentenceTrim={i.sentenceTrim}
           cypher={i.cypher}
+          cypherTrim={i.cypherTrim}
           chartData={i.dataChart}
           chartVis={i.dataVis}
           deleteCard={deleteCard}

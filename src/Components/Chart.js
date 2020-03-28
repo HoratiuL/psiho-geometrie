@@ -15,11 +15,11 @@ class Chart extends Component {
       labels: chartData,
       datasets: [
         {
-          label: "My First dataset",
+          label: "My First dataset - Chart.js",
           showLine: true,
           fill: false,
-          // backgroundColor: "rgba(214, 20, 115, 0.5)",
-          borderColor: this.gradient,
+          backgroundColor: "rgba(214, 20, 115, 0.5)",
+          // borderColor: this.gradient,
           data: chartData
         }
       ]

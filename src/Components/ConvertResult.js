@@ -12,17 +12,34 @@ import "./ConvertResult.css";
 // import CanvasTest from "./CanvasTest";
 
 export default function ConvertResult(props) {
-  const { id, sentence, cypher, chartData, chartVis, deleteCard } = props;
+  const {
+    id,
+    sentence,
+    sentenceWhole,
+    sentenceTrim,
+    cypher,
+    cypherTrim,
+    chartData,
+    chartVis,
+    deleteCard
+  } = props;
   return (
     <Card className="result-item">
       <CardContent>
         <Typography>Phrase: {sentence}</Typography>
+        <Typography>Phrase Whole: {sentenceWhole}</Typography>
+        <Typography>Phrase Trim: {sentenceTrim}</Typography>
+
         <Typography>Code: {cypher}</Typography>
+        <Typography>Code Trim: {cypherTrim}</Typography>
       </CardContent>
       <Typography>ChartJS chart</Typography>
       <CardMedia>
         <Chart chartData={chartData} />
       </CardMedia>
+      <Typography>...</Typography>
+      <Typography>Chart react vis</Typography>
+
       <CardMedia>
         <ChartVis chartVis={chartVis} />
       </CardMedia>

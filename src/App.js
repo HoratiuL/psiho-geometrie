@@ -15,7 +15,8 @@ class App extends Component {
       converted: [],
       myObj: {},
       phrase: [],
-      code: []
+      code: [],
+      codeT: []
     };
   }
 
@@ -30,46 +31,85 @@ class App extends Component {
     return string
       .split("")
       .filter(function(item, pos, self) {
-        return self.indexOf(item) == pos;
+        return self.indexOf(item) === pos;
       })
       .join("");
   };
 
   convert = inputTerm => {
-    let { phrase, code } = this.state;
+    let { phrase, code, codeT } = this.state;
     let vorb = this.removeDuplicateCharacters(inputTerm);
+    let newPhrase = inputTerm.split(" ");
 
-    console.log("this is:", vorb);
+    // console.log("this is inputTerm:", inputTerm);
 
-    for (var i = 0; i < Object.values(vorb).length; i++) {
-      // console.log(inputTerm);
-      for (var j = 0; j < Object.keys(bigArray).length; j++) {
-        if (Object.values(vorb)[i] === Object.keys(bigArray)[j]) {
-          code += Object.values(bigArray)[j];
-          // console.log(code);
+    // VARIANTA 1 - VECHE
+    // for (var i = 0; i < Object.values(vorb).length; i++) {
+    //   // console.log(inputTerm);
+    //   for (var j = 0; j < Object.keys(bigArray).length; j++) {
+    //     if (Object.values(vorb)[i] === Object.keys(bigArray)[j]) {
+    //       code += Object.values(bigArray)[j];
+    //       // console.log(code);
+    //     }
+    //   }
+    // }
+
+    // VARIANTA 2
+    // CUVANTUL INTREG
+    // for (let i = 0; i < Object.values(newPhrase).length; i++) {
+    //   // console.log("this is inputTerm:", Object.values(inputTerm[i]));
+    //   for (let j = 0; j < Object.keys(bigArray).length; j++) {
+    //     if (Object.values(newPhrase)[i] === Object.keys(bigArray)[j]) {
+    //       code += Object.values(bigArray)[j];
+    //       console.log("this is code:", code);
+    //     }
+    //   }
+    // }
+
+    newPhrase.map(element => {
+      for (let i = 0; i < Object.values(element).length; i++) {
+        console.log("this is el:", Object.values(element)[i]);
+        for (let j = 0; j < Object.keys(bigArray).length; j++) {
+          if (Object.values(element)[i] === Object.keys(bigArray)[j]) {
+            code += Object.values(bigArray)[j];
+          }
+        }
+      }
+    });
+
+    // ELIMINATE DUBLURILE
+    for (var x = 0; x < Object.values(vorb).length; x++) {
+      // console.log(vorb);
+      for (var y = 0; y < Object.keys(bigArray).length; y++) {
+        if (Object.values(vorb)[x] === Object.keys(bigArray)[y]) {
+          codeT += Object.values(bigArray)[y];
+          // console.log(codeT);
         }
       }
     }
-    phrase = vorb;
+
+    phrase = inputTerm;
     this.setState({
       phrase: phrase,
       inputTerm: ""
     });
 
     let myObj = {};
-    myObj["sentence"] = phrase;
+    myObj["sentenceWhole"] = phrase;
+    myObj["sentenceTrim"] = this.removeDuplicateCharacters(phrase);
     myObj["cypher"] = code;
+    myObj["cypherTrim"] = codeT;
     myObj.dataChart = [];
     myObj.dataVis = [];
 
-    for (i = 0; i < code.length; i++) {
+    for (var i = 0; i < code.length; i++) {
       //Good data type for chartjs
       myObj["dataChart"].push(parseInt(code[i]));
       // Good data type for canvasjs
       // myObj["data"].push({ x: parseInt(code[i]), y: parseInt(code[i]) });
       //Good data type for react-chartjs-2
       myObj["dataVis"].push({
-        x: i + 1,
+        x: i,
         y: code[i]
       });
       // console.log(myObj["data"]);
@@ -88,6 +128,20 @@ class App extends Component {
     // console.log(phrase);
     console.log(myObj);
   };
+
+  // convertSentence = inputTerm => {
+  //   let { phrase, code } = this.state;
+
+  //   for (var i = 0; i < Object.values(inputTerm).length; i++) {
+  //     console.log("this is line 97: ", inputTerm);
+  //     for (var j = 0; j < Object.keys(bigArray).length; j++) {
+  //       if (Object.values(inputTerm)[i] === Object.keys(bigArray)[j]) {
+  //         code += Object.values(bigArray)[j];
+  //         // console.log(code);
+  //       }
+  //     }
+  //   }
+  // };
 
   deleteCard = id => {
     console.log(id);
